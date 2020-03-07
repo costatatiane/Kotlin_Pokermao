@@ -16,7 +16,7 @@
             android:layout_width="128dp"
             android:layout_height="128dp"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="loading_pokemon.json"
+            app:lottie_fileName="loading.json"
             app:lottie_loop="true" />
 
     <TextView
