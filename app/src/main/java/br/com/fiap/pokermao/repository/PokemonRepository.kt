@@ -14,4 +14,10 @@ interface PokemonRepository {
         onComplete: (List<Pokemon>) -> Unit,
         onError: (Throwable) -> Unit
     )
+
+    fun updatePokemon(
+        pokemon: Pokemon,
+        onComplete:(Pokemon?) -> Unit,
+        onError:(Throwable) -> Unit
+    )
 }

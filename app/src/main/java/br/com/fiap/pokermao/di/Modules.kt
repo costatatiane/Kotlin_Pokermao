@@ -5,6 +5,8 @@ import br.com.fiap.pokermao.api.AuthInterceptor
 import br.com.fiap.pokermao.api.PokemonService
 import br.com.fiap.pokermao.repository.PokemonRepository
 import br.com.fiap.pokermao.repository.PokemonRepositoryImpl
+import br.com.fiap.pokermao.view.form.FormPokemonViewModel
+import br.com.fiap.pokermao.view.list.ListPokemonsAdapter
 import br.com.fiap.pokermao.view.list.ListPokemonsViewModel
 import br.com.fiap.pokermao.view.splash.SplashViewModel
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -19,13 +21,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+val viewModule = module {
+    factory { ListPokemonsAdapter(get()) }
+}
+
 val viewModelModule = module {
     viewModel { SplashViewModel(get()) }
     viewModel { ListPokemonsViewModel(get()) }
+    viewModel { FormPokemonViewModel(get()) }
 }
+
 val repositoryModule = module {
     single<PokemonRepository> { PokemonRepositoryImpl(get()) }
 }
+
 val networkModule = module {
     single<Interceptor> { AuthInterceptor() }
     single { createNetworkClient(get(), get(named("baseUrl"))).create(PokemonService::class.java) }

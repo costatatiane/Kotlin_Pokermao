@@ -4,24 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.fiap.pokermao.model.Pokemon
 import br.com.fiap.pokermao.repository.PokemonRepository
+import br.com.fiap.pokermao.view.ViewState
 
 class ListPokemonsViewModel (val pokemonRepository: PokemonRepository) : ViewModel() {
 
-    val messageError: MutableLiveData<String> = MutableLiveData()
-    val pokemons: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val viewState: MutableLiveData<ViewState<List<Pokemon>>> = MutableLiveData()
 
     fun getPokemons() {
-        isLoading.value = true
+        viewState.value = ViewState.Loading
         pokemonRepository.getPokemons(
             150, "number,asc", {pokemonsList ->
-                pokemons.value = pokemonsList
-                messageError.value = ""
-                isLoading.value = false
+                viewState.value = ViewState.Success(pokemonsList)
             }, { error ->
-                pokemons.value = emptyList()
-                messageError.value = error.message
-                isLoading.value = false
+                viewState.value = ViewState.Failed(error)
             }
         )
     }
