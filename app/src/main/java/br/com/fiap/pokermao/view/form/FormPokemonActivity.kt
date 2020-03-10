@@ -63,7 +63,7 @@ class FormPokemonActivity : AppCompatActivity() {
     }
 
     private fun setValues() {
-        pokemon = intent.getParcelableExtra<Pokemon>("POKEMON")
+        pokemon = intent.getParcelableExtra(EXTRA_POKEMON)
         tvPokemonNameForm.text = pokemon.name
 
         picasso.load("https://pokedexdx.herokuapp.com${pokemon.imageUrl}").into(ivPokemonForm)
@@ -99,5 +99,6 @@ class FormPokemonActivity : AppCompatActivity() {
 
     companion object {
         val REQUEST_CHANGE_DATA = 200
+        val EXTRA_POKEMON = "EXTRA_POKEMON"
     }
 }

@@ -48,10 +48,9 @@ class ListPokemonsActivity : AppCompatActivity() {
 
                     adapter.setItems(viewState.data)
 
-                    adapter.setOnClickListener {
+                    adapter.setOnClickListener { pokemon ->
                         val pokemonDetail = Intent(this, FormPokemonActivity::class.java)
-                        pokemonDetail.putExtra("POKEMON", it)
-                        Toast.makeText(this, it.name, Toast.LENGTH_LONG).show()
+                        pokemonDetail.putExtra(FormPokemonActivity.EXTRA_POKEMON, pokemon)
                         startActivityForResult(pokemonDetail, FormPokemonActivity.REQUEST_CHANGE_DATA)
                     }
                 }
