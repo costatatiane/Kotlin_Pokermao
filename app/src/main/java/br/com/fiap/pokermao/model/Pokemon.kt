@@ -12,5 +12,6 @@ data class Pokemon(
     @SerializedName("attack") var attack: Int,
     @SerializedName("defense") var defense: Int,
     @SerializedName("velocity") var velocity: Int,
-    @SerializedName("ps") var ps: Int
+    @SerializedName("ps") var ps: Int,
+    @SerializedName("description") var description: String
 ) : Parcelable
